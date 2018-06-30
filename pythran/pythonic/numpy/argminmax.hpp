@@ -139,7 +139,7 @@ namespace numpy
                   std::integral_constant<size_t, N>)
   {
     static_assert(N >= 1, "specialization ok");
-    for (long i = 0, n = expr.shape()[0]; i < n; ++i)
+    for (long i = 0, n = std::get<0>(expr.shape()); i < n; ++i)
       _argminmax_tail<Op, Dim, Axis>(out.fast(i), expr.fast(i), curr,
                                      curr_minmax.fast(i),
                                      std::integral_constant<size_t, N - 1>());
@@ -150,7 +150,7 @@ namespace numpy
   _argminmax_head(T &&out, E const &expr, std::integral_constant<size_t, 1>)
   {
     typename E::dtype val = Op::limit();
-    for (long i = 0, n = expr.shape()[0]; i < n; ++i)
+    for (long i = 0, n = std::get<0>(expr.shape()); i < n; ++i)
       _argminmax_tail<Op, Dim, Axis>(std::forward<T>(out), expr.fast(i), i, val,
                                      std::integral_constant<size_t, 0>());
   }

@@ -252,7 +252,7 @@ namespace types
     return offset + std::get<0>(indices) * mult;
   }
 
-  template <size_t I, class T0, class T1>
+  template <long I, class T0, class T1>
   size_t compute_fast_offset(size_t offset, long mult, T0 const &indices,
                              T1 const &shape, std::integral_constant<long, I>)
   {
@@ -407,7 +407,7 @@ namespace types
     return offset + std::get<0>(indices) * mult;
   }
 
-  template <size_t I, class T0, class T1>
+  template <long I, class T0, class T1>
   size_t compute_offset(size_t offset, long mult, T0 const &indices,
                         T1 const &shape, std::integral_constant<long, I>)
   {
@@ -482,7 +482,8 @@ namespace types
   long numpy_iexpr<Arg>::buffer_offset(ndarray<T, pS> const &arg, long index,
                                        utils::int_<N>)
   {
-    sutils::assign(std::get<value - N>(_shape),  std::get<value - N + 1>(arg._shape));
+    sutils::assign(std::get<value - N>(_shape),
+                   std::get<value - N + 1>(arg._shape));
     buffer_offset(arg, 0, utils::int_<N - 1>());
     return index * arg._strides[0];
   }
