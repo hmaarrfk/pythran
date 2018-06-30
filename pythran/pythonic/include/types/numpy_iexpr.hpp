@@ -45,7 +45,8 @@ namespace types
                                   dtype const *>::type;
 
     dtype *buffer;
-    using shape_t = array<long, value>;
+    using shape_t =
+        sutils::pop_head_t<typename std::remove_reference<Arg>::type::shape_t>;
     shape_t _shape;
 
     numpy_iexpr();

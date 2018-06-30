@@ -768,6 +768,21 @@ namespace sutils
   };
 
   template <class T>
+  struct pop_head;
+
+  template <class Ty, class... Tys>
+  struct pop_head<types::pshape<Ty, Tys...>> {
+    using type = types::pshape<Tys...>;
+  };
+  template <class T, size_t N>
+  struct pop_head<types::array<T, N>> {
+    using type = types::array<T, N - 1>;
+  };
+
+  template <class T>
+  using pop_head_t = typename pop_head<T>::type;
+
+  template <class T>
   using pop_tail_t = typename pop_tail<T>::type;
 
   template <class P, class T>
