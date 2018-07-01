@@ -217,7 +217,7 @@ namespace types
       -> decltype(this->fast(i))
   {
     if (i < 0)
-      i += _shape[0];
+      i += std::get<0>(_shape);
     return fast(i);
   }
 
@@ -371,8 +371,7 @@ namespace types
   template <class Op, class... Args>
   numpy_expr<Op, Args...>::operator bool() const
   {
-    if (std::any_of(_shape.begin(), _shape.end(),
-                    [](long n) { return n != 1; }))
+    if (sutils::any_of(_shape, [](long n) { return n != 1; }))
       throw ValueError("The truth value of an array with more than one element "
                        "is ambiguous. Use a.any() or a.all()");
     array<long, value> first = {0};
@@ -382,14 +381,13 @@ namespace types
   template <class Op, class... Args>
   long numpy_expr<Op, Args...>::flat_size() const
   {
-    return std::accumulate(_shape.begin() + 1, _shape.end(), _shape.front(),
-                           std::multiplies<long>());
+    return sutils::prod(_shape);
   }
 
   template <class Op, class... Args>
   long numpy_expr<Op, Args...>::size() const
   {
-    return _shape[0];
+    return std::get<0>(_shape);
   }
 }
 PYTHONIC_NS_END

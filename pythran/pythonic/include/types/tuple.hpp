@@ -711,6 +711,50 @@ namespace std
 PYTHONIC_NS_BEGIN
 namespace sutils
 {
+
+  template <class Curr, class... Ss>
+  struct shape_merger;
+  template <class Curr>
+  struct shape_merger<Curr> {
+    using type = Curr;
+  };
+
+  template <class Curr, class... Ss>
+  struct shape_merger<Curr, long, Ss...> {
+    using type = long;
+  };
+  template <long N0, long N1, class... Ss>
+  struct shape_merger<std::integral_constant<long, N0>,
+                      std::integral_constant<long, N1>, Ss...>
+      : shape_merger<std::integral_constant<long, (N0 > N1 ? N0 : N1)>, Ss...> {
+  };
+  template <long N, class... Ss>
+  struct shape_merger<long, std::integral_constant<long, N>, Ss...> {
+    using type = long;
+  };
+
+  template <size_t I, class Ss>
+  struct merge_shape;
+  template <size_t I, class... Ss>
+  struct merge_shape<I, std::tuple<Ss...>> {
+    using type = typename shape_merger<typename std::conditional<
+        (I <= std::tuple_size<Ss>::value),
+        typename std::tuple_element<I, Ss>::type,
+        std::integral_constant<long, 1>>::type...>::type;
+  };
+  template <class Ss, class T>
+  struct merged_shapes;
+
+  template <class Ss, size_t... Is>
+  struct merged_shapes<Ss, utils::index_sequence<Is...>> {
+    using type = types::pshape<typename merge_shape<Is, Ss>::type...>;
+  };
+
+  template <size_t N, class... Ss>
+  using merged_shapes_t =
+      typename merged_shapes<std::tuple<Ss...>,
+                             utils::make_index_sequence<N>>::type;
+
   template <class T>
   struct transpose;
   template <class T>

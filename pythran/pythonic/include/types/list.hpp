@@ -341,6 +341,7 @@ namespace types
     static const size_t value = 1;
     static const bool is_vectorizable = false;
     static const bool is_strided = false;
+    using shape_t = types::array<long, value>;
     typedef char value_type;
 
     typedef empty_iterator iterator;

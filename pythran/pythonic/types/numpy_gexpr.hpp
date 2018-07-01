@@ -544,7 +544,9 @@ namespace types
   {
     buffer += buffer_offset(
         arg, std::get<count_leading_long<S...>::value>(slices).lower);
-    flat_copy<value>()(&_shape[0], &expr.shape()[1]);
+    sutils::copy_shape<0, 1>(_shape, expr.shape(),
+                             utils::make_index_sequence<value>());
+    // flat_copy<value>()(&_shape[0], &expr.shape()[1]);
   }
 
   template <class Arg, class... S>
@@ -555,7 +557,9 @@ namespace types
   {
     buffer += buffer_offset(
         arg, std::get<count_leading_long<S...>::value>(slices).lower);
-    flat_copy<value>()(&_shape[0], &expr.shape()[1]);
+    // flat_copy<value>()(&_shape[0], &expr.shape()[1]);
+    sutils::copy_shape<0, 1>(_shape, expr.shape(),
+                             utils::make_index_sequence<value>());
   }
 
   template <class Arg, class... S>
@@ -834,7 +838,7 @@ namespace types
       -> decltype(this->fast(i))
   {
     if (i < 0)
-      i += _shape[0];
+      i += std::get<0>(_shape);
     return fast(i);
   }
 
@@ -842,7 +846,7 @@ namespace types
   auto numpy_gexpr<Arg, S...>::operator[](long i) -> decltype(this->fast(i))
   {
     if (i < 0)
-      i += _shape[0];
+      i += std::get<0>(_shape);
     return fast(i);
   }
 
@@ -924,7 +928,7 @@ namespace types
       numpy_vexpr<numpy_gexpr<Arg, S...>, ndarray<long, pshape<long>>>>::type
   numpy_gexpr<Arg, S...>::fast(F const &filter) const
   {
-    long sz = filter.shape()[0];
+    long sz = std::get<0>(filter.shape());
     long *raw = (long *)malloc(sz * sizeof(long));
     long n = 0;
     for (long i = 0; i < sz; ++i)
@@ -950,8 +954,7 @@ namespace types
   template <class Arg, class... S>
   numpy_gexpr<Arg, S...>::operator bool() const
   {
-    if (std::any_of(_shape.begin(), _shape.end(),
-                    [](long n) { return n != 1; }))
+    if (sutils::any_of(_shape, [](long n) { return n != 1; }))
       throw ValueError("The truth value of an array with more than one element "
                        "is ambiguous. Use a.any() or a.all()");
     return *buffer;
@@ -960,14 +963,13 @@ namespace types
   template <class Arg, class... S>
   long numpy_gexpr<Arg, S...>::flat_size() const
   {
-    return std::accumulate(_shape.begin() + 1, _shape.end(), *_shape.begin(),
-                           std::multiplies<long>());
+    return sutils::prod(_shape);
   }
 
   template <class Arg, class... S>
   long numpy_gexpr<Arg, S...>::size() const
   {
-    return _shape[0];
+    return std::get<0>(_shape);
   }
 
   // As gexpr has to begin with a slice. When we access it, we need to forward

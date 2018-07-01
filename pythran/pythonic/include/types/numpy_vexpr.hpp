@@ -47,7 +47,8 @@ namespace types
 
     numpy_vexpr &operator=(numpy_vexpr const &);
 
-    array<long, value> shape() const
+    using shape_t = array<long, value>;
+    shape_t shape() const
     {
       auto res = data_.shape();
       std::get<0>(res) = std::get<0>(view_.shape());

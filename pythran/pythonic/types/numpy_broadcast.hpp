@@ -125,9 +125,9 @@ namespace types
   }
 
   template <class T, class B>
-  array<long, 1> broadcast<T, B>::shape() const
+  typename broadcast<T, B>::shape_t broadcast<T, B>::shape() const
   {
-    return {0};
+    return {};
   }
 
   template <class T, class B>

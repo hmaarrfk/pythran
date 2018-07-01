@@ -485,7 +485,11 @@ namespace types
     std::tuple<Args...> args;
 #endif
     static_assert(value != 0, "valid shape");
-    using shape_t = array<long, value>;
+    using shape_t = sutils::merged_shapes_t<
+        value, typename std::remove_reference<Args>::type::shape_t...>;
+    static_assert(value == std::tuple_size<shape_t>::value,
+                  "consistent shape and size");
+
     shape_t _shape;
 
     numpy_expr() = default;
