@@ -257,6 +257,9 @@ namespace types
     using const_flat_iterator = T const *;
 
     using shape_t = pS;
+    static_assert(std::tuple_size<shape_t>::value == value,
+                  "consistent shape size");
+
     /* members */
     utils::shared_ref<raw_array<T>> mem; // shared data pointer
     T *buffer;      // pointer to the first data stored in the equivalent flat

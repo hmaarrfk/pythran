@@ -1500,6 +1500,29 @@ PyObject *to_python<types::numpy_gexpr<Arg, S...>>::convert(
 
 namespace impl
 {
+  template <class T>
+  struct is_integral_constant : std::false_type {
+  };
+  template <class T, T N>
+  struct is_integral_constant<std::integral_constant<T, N>> : std::true_type {
+  };
+
+  template <class pS, class T, size_t... Is>
+  bool check_shape(T const *dims, utils::index_sequence<Is...>)
+  {
+    types::array<bool, sizeof...(Is)> dims_match = {
+        (is_integral_constant<typename std::tuple_element<Is, pS>::type>::value
+             ? (dims[Is] ==
+                std::conditional<
+                    is_integral_constant<
+                        typename std::tuple_element<Is, pS>::type>::value,
+                    typename std::tuple_element<Is, pS>::type,
+                    std::integral_constant<long, 0>>::type::value)
+             : true)...};
+    return std::find(dims_match.begin(), dims_match.end(), false) ==
+           dims_match.end();
+  }
+
   template <typename T, class pS>
   PyArrayObject *check_array_type_and_dims(PyObject *obj)
   {
@@ -1562,10 +1585,13 @@ bool from_python<types::ndarray<T, pS>>::is_convertible(PyObject *obj)
   // this is supposed to be a texpr
   if ((PyArray_FLAGS(arr) & NPY_ARRAY_F_CONTIGUOUS) &&
       ((PyArray_FLAGS(arr) & NPY_ARRAY_C_CONTIGUOUS) == 0) &&
-      (std::tuple_size<pS>::value > 1))
+      (std::tuple_size<pS>::value > 1)) {
     return false;
-  else
-    return true;
+  }
+
+  // check if dimension size match
+  return impl::check_shape<pS>(
+      dims, utils::make_index_sequence<std::tuple_size<pS>::value>());
 }
 template <typename T, class pS>
 types::ndarray<T, pS> from_python<types::ndarray<T, pS>>::convert(PyObject *obj)

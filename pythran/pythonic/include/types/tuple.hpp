@@ -166,6 +166,12 @@ namespace types
         : values{check_type(buffer[Is], std::get<Is>(values))...}
     {
     }
+    template <class... TyOs>
+    pshape(pshape<TyOs...> other)
+        : pshape(other.values, utils::make_index_sequence<sizeof...(TyOs)>())
+    {
+      static_assert(sizeof...(TyOs) == sizeof...(Tys), "compatible sizes");
+    }
 
     pshape() = default;
     pshape(pshape const &) = default;
@@ -705,7 +711,8 @@ namespace std
 
   template <size_t I, class... Tys>
   struct tuple_element<I, pythonic::types::pshape<Tys...>> {
-    using type = long;
+    using type = typename std::tuple_element < I < sizeof...(Tys) ? I : 0,
+          std::tuple<Tys...>> ::type;
   };
 }
 PYTHONIC_NS_BEGIN
@@ -738,8 +745,9 @@ namespace sutils
   template <size_t I, class... Ss>
   struct merge_shape<I, std::tuple<Ss...>> {
     using type = typename shape_merger<typename std::conditional<
-        (I <= std::tuple_size<Ss>::value),
-        typename std::tuple_element<I, Ss>::type,
+        (I < std::tuple_size<Ss>::value),
+        typename std::tuple_element<(I < std::tuple_size<Ss>::value ? I : 0),
+                                    Ss>::type,
         std::integral_constant<long, 1>>::type...>::type;
   };
   template <class Ss, class T>
