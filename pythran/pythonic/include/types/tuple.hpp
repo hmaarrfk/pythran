@@ -211,7 +211,7 @@ namespace types
       return std::get<I>(values);
     }
     template <size_t I>
-        auto get() & -> decltype(std::get<I>(values)) &
+    auto get() -> decltype(std::get<I>(values))
     {
       return std::get<I>(values);
     }
