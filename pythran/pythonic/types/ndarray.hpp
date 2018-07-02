@@ -1142,7 +1142,7 @@ namespace types
       numpy_gexpr<E, normalize_t<S>...> _build_gexpr<1>::
       operator()(E const &a, S const &... slices)
       {
-        return a(slices...);
+        return E(a)(slices...);
       }
     }
 
@@ -1156,17 +1156,17 @@ namespace types
     auto getattr<attr::REAL, E>::make_real(E const &a, utils::int_<1>)
         -> decltype(_build_gexpr<E::value>{}(
             ndarray<typename types::is_complex<typename E::dtype>::type,
-                    make_pshape_t<E::value>>{},
+                    types::array<long, E::value>>{},
             slice()))
     {
       using stype = typename types::is_complex<typename E::dtype>::type;
-      auto new_shape = a.shape();
+      auto new_shape = sutils::array(a.shape());
       std::get<E::value - 1>(new_shape) *= 2;
       // this is tricky && dangerous!
       auto translated_mem =
           reinterpret_cast<utils::shared_ref<raw_array<stype>> const &>(a.mem);
-      ndarray<stype, make_pshape_t<E::value>> translated{translated_mem,
-                                                         new_shape};
+      ndarray<stype, types::array<long, E::value>> translated{translated_mem,
+                                                              new_shape};
       return _build_gexpr<E::value>{}(
           translated, slice{0, std::get<E::value - 1>(new_shape), 2});
     }
@@ -1191,30 +1191,30 @@ namespace types
     }
 
     template <class E>
-    types::ndarray<typename E::dtype, types::make_pshape_t<E::value>>
+    types::ndarray<typename E::dtype, typename E::shape_t>
     getattr<attr::IMAG, E>::make_imag(E const &a, utils::int_<0>)
     {
       // cannot use numpy.zero: forward declaration issue
-      return E(
+      return {
           (typename E::dtype *)calloc(a.flat_size(), sizeof(typename E::dtype)),
-          a.shape(), types::ownership::owned);
+          a.shape(), types::ownership::owned};
     }
 
     template <class E>
     auto getattr<attr::IMAG, E>::make_imag(E const &a, utils::int_<1>)
         -> decltype(_build_gexpr<E::value>{}(
             ndarray<typename types::is_complex<typename E::dtype>::type,
-                    types::make_pshape_t<E::value>>{},
+                    types::array<long, E::value>>{},
             slice()))
     {
       using stype = typename types::is_complex<typename E::dtype>::type;
-      auto new_shape = a.shape();
+      auto new_shape = sutils::array(a.shape());
       std::get<E::value - 1>(new_shape) *= 2;
       // this is tricky && dangerous!
       auto translated_mem =
           reinterpret_cast<utils::shared_ref<raw_array<stype>> const &>(a.mem);
-      ndarray<stype, make_pshape_t<E::value>> translated{translated_mem,
-                                                         new_shape};
+      ndarray<stype, types::array<long, E::value>> translated{translated_mem,
+                                                              new_shape};
       return _build_gexpr<E::value>{}(
           translated, slice{1, std::get<E::value - 1>(new_shape), 2});
     }

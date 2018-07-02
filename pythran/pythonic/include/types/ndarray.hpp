@@ -739,7 +739,7 @@ namespace types
       auto make_real(E const &a, utils::int_<1>)
           -> decltype(_build_gexpr<E::value>{}(
               ndarray<typename types::is_complex<typename E::dtype>::type,
-                      make_pshape_t<E::value>>{},
+                      types::array<long, E::value>>{},
               slice()));
 
       auto operator()(E const &a) -> decltype(this->make_real(
@@ -757,13 +757,13 @@ namespace types
     template <class E>
     struct getattr<attr::IMAG, E> {
 
-      types::ndarray<typename E::dtype, make_pshape_t<E::value>>
+      types::ndarray<typename E::dtype, typename E::shape_t>
       make_imag(E const &a, utils::int_<0>);
 
       auto make_imag(E const &a, utils::int_<1>)
           -> decltype(_build_gexpr<E::value>{}(
               ndarray<typename types::is_complex<typename E::dtype>::type,
-                      make_pshape_t<E::value>>{},
+                      types::array<long, E::value>>{},
               slice()));
 
       auto operator()(E const &a) -> decltype(this->make_imag(
