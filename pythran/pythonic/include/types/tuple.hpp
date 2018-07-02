@@ -224,6 +224,11 @@ namespace types
   struct make_pshape;
 
   template <class... Tys>
+  struct make_pshape<0, Tys...> {
+    using type = pshape<Tys...>;
+  };
+
+  template <class... Tys>
   struct make_pshape<1, Tys...> {
     using type = pshape<long, Tys...>;
   };

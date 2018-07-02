@@ -162,7 +162,7 @@ namespace types
     explicit operator bool() const;
     long flat_size() const;
     intptr_t id() const;
-    ndarray<dtype, make_pshape_t<value>> copy() const
+    ndarray<dtype, typename E::shape_t> copy() const
     {
       return *this;
     }
