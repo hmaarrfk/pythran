@@ -85,9 +85,18 @@ namespace types
     auto operator()(ndarray<T, pS> &&a, long s0, S const &... s)
         -> decltype(std::declval<numpy_iexpr<ndarray<T, pS>>>()(s...));
 
+    template <class T, class pS, long N, class... S>
+    auto operator()(ndarray<T, pS> &&a, std::integral_constant<long, N> s0,
+                    S const &... s)
+        -> decltype(std::declval<numpy_iexpr<ndarray<T, pS>>>()(s...));
+
     template <class T, class pS, class... S>
     auto operator()(ndarray<T, pS> const &a, long s0, S const &... s)
         -> decltype(a[s0](s...));
+
+    template <class T, class pS, long N, class... S>
+    auto operator()(ndarray<T, pS> const &a, std::integral_constant<long, N> s0,
+                    S const &... s) -> decltype(a[N](s...));
 
     template <class T, class pS, class... S, size_t... Is>
     numpy_gexpr<ndarray<T, pS>, normalize_t<S>...>
@@ -426,6 +435,11 @@ namespace types
     static_assert(
         utils::all_of<std::is_same<S, normalize_t<S>>::value...>::value,
         "all slices are normalized");
+    static_assert(
+        utils::all_of<(std::is_same<S, long>::value ||
+                       std::is_same<S, contiguous_normalized_slice>::value ||
+                       std::is_same<S, normalized_slice>::value)...>::value,
+        "all slices are valid");
 
     // numpy_gexpr is a wrapper for extended sliced array around a numpy
     // expression.

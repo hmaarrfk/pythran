@@ -177,11 +177,28 @@ namespace types
     return std::move(a)[s0](s...);
   }
 
+  template <class T, class pS, long N, class... S>
+  auto extended_slice<0>::operator()(ndarray<T, pS> &&a,
+                                     std::integral_constant<long, N> s0,
+                                     S const &... s)
+      -> decltype(std::declval<numpy_iexpr<ndarray<T, pS>>>()(s...))
+  {
+    return std::move(a)[N](s...);
+  }
+
   template <class T, class pS, class... S>
   auto extended_slice<0>::operator()(ndarray<T, pS> const &a, long s0,
                                      S const &... s) -> decltype(a[s0](s...))
   {
     return a[s0](s...);
+  }
+
+  template <class T, class pS, long N, class... S>
+  auto extended_slice<0>::operator()(ndarray<T, pS> const &a,
+                                     std::integral_constant<long, N> s0,
+                                     S const &... s) -> decltype(a[N](s...))
+  {
+    return a[N](s...);
   }
 
   template <class T, class pS, class... S, size_t... Is>
