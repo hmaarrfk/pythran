@@ -16,11 +16,11 @@ namespace numpy
   transpose(types::ndarray<T, types::pshape<pS0, pS1>> const &arr);
 
   template <class T, class pS>
-  types::ndarray<T, types::make_pshape_t<std::tuple_size<pS>::value>>
+  types::ndarray<T, types::array<long, std::tuple_size<pS>::value>>
   transpose(types::ndarray<T, pS> const &a);
 
   template <class T, class pS, size_t M>
-  types::ndarray<T, types::make_pshape_t<std::tuple_size<pS>::value>>
+  types::ndarray<T, types::array<long, std::tuple_size<pS>::value>>
   transpose(types::ndarray<T, pS> const &a, types::array<long, M> const &t);
 
   NUMPY_EXPR_TO_NDARRAY0_DECL(transpose);

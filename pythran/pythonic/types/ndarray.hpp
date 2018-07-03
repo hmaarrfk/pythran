@@ -687,12 +687,10 @@ namespace types
 
   /* slice indexing */
   template <class T, class pS>
-  ndarray<T,
-          typename pS::template push_front_t<std::integral_constant<size_t, 1>>>
+  ndarray<T, sutils::push_front_t<pS, std::integral_constant<size_t, 1>>>
       ndarray<T, pS>::operator[](none_type) const
   {
-    typename pS::template push_front_t<std::integral_constant<size_t, 1>>
-        new_shape;
+    sutils::push_front_t<pS, std::integral_constant<size_t, 1>> new_shape;
     // new_shape[0] = 1;
     sutils::copy_shape<1, -1>(
         new_shape, _shape,
@@ -788,7 +786,7 @@ namespace types
       numpy_vexpr<ndarray<T, pshape<long>>, ndarray<long, pshape<long>>>>::type
   ndarray<T, pS>::fast(F const &filter) const
   {
-    return flat()[ndarray<typename F::dtype, make_pshape_t<F::value>>(filter)
+    return flat()[ndarray<typename F::dtype, typename F::shape_t>(filter)
                       .flat()];
   }
 
@@ -1031,7 +1029,7 @@ namespace types
   typename std::enable_if<is_array<E>::value, std::ostream &>::type
   operator<<(std::ostream &os, E const &e)
   {
-    return os << ndarray<typename E::dtype, make_pshape_t<E::value>>{e};
+    return os << ndarray<typename E::dtype, typename E::shape_t>{e};
   }
 
   /* } */
@@ -1486,16 +1484,16 @@ to_python<types::numpy_iexpr<Arg>>::convert(types::numpy_iexpr<Arg> const &v)
 {
   return ::to_python(
       types::ndarray<typename types::numpy_iexpr<Arg>::dtype,
-                     types::make_pshape_t<types::numpy_iexpr<Arg>::value>>(v));
+                     typename types::numpy_iexpr<Arg>::shape_t>(v));
 }
 
 template <class Arg, class... S>
 PyObject *to_python<types::numpy_gexpr<Arg, S...>>::convert(
     types::numpy_gexpr<Arg, S...> const &v)
 {
-  return ::to_python(types::ndarray<
-      typename types::numpy_gexpr<Arg, S...>::dtype,
-      types::make_pshape_t<types::numpy_gexpr<Arg, S...>::value>>{v});
+  return ::to_python(
+      types::ndarray<typename types::numpy_gexpr<Arg, S...>::dtype,
+                     typename types::numpy_gexpr<Arg, S...>::shape_t>{v});
 }
 
 namespace impl

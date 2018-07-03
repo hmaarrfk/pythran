@@ -124,8 +124,8 @@ namespace types
   /* helper to build a new shape out of a shape && a slice with new axis
    */
   template <size_t N, class pS, size_t C>
-  make_pshape_t<N> make_reshape(pS const &shape,
-                                array<bool, C> const &is_new_axis)
+  types::array<long, N> make_reshape(pS const &shape,
+                                     array<bool, C> const &is_new_axis)
   {
     array<long, N> new_shape;
     return sutils::copy_new_axis(new_shape, shape, is_new_axis);
@@ -148,9 +148,9 @@ namespace types
   template <size_t C>
   template <class T, class pS, class... S>
   auto extended_slice<C>::operator()(ndarray<T, pS> &&a, S const &... s)
-      -> decltype(
-          std::declval<ndarray<T, sutils::concat_t<pS, make_pshape_t<C>>>>()(
-              std::declval<typename to_slice<S>::type>()...))
+      -> decltype(std::declval<
+          ndarray<T, types::array<long, std::tuple_size<pS>::value + C>>>()(
+          std::declval<typename to_slice<S>::type>()...))
   {
     return std::move(a).reshape(make_reshape<std::tuple_size<pS>::value + C>(
         a.shape(), array<bool, sizeof...(S)>{to_slice<S>::is_new_axis...}))(
@@ -160,9 +160,9 @@ namespace types
   template <size_t C>
   template <class T, class pS, class... S>
   auto extended_slice<C>::operator()(ndarray<T, pS> const &a, S const &... s)
-      -> decltype(
-          std::declval<ndarray<T, sutils::concat_t<pS, make_pshape_t<C>>>>()(
-              std::declval<typename to_slice<S>::type>()...))
+      -> decltype(std::declval<
+          ndarray<T, types::array<long, std::tuple_size<pS>::value + C>>>()(
+          std::declval<typename to_slice<S>::type>()...))
   {
     return a.reshape(make_reshape<std::tuple_size<pS>::value + C>(
         a.shape(), array<bool, sizeof...(S)>{{to_slice<S>::is_new_axis...}}))(
@@ -577,8 +577,8 @@ namespace types
     assert(buffer);
     if (may_overlap(*this, expr)) {
       return utils::broadcast_copy<
-          numpy_gexpr &, ndarray<typename E::dtype, make_pshape_t<E::value>>,
-          value, value - utils::dim_of<E>::value, is_vectorizable>(*this, expr);
+          numpy_gexpr &, ndarray<typename E::dtype, typename E::shape_t>, value,
+          value - utils::dim_of<E>::value, is_vectorizable>(*this, expr);
     } else {
       // 100% sure there's no overlap
       return utils::broadcast_copy < numpy_gexpr &, E, value,
@@ -662,7 +662,7 @@ namespace types
     if (may_overlap(*this, expr)) {
       using NBExpr =
           ndarray<typename std::remove_reference<BExpr>::type::dtype,
-                  make_pshape_t<std::remove_reference<BExpr>::type::value>>;
+                  typename std::remove_reference<BExpr>::type::shape_t>;
       return utils::broadcast_update < Op, numpy_gexpr &, NBExpr, value,
              value - (std::is_scalar<E>::value + utils::dim_of<E>::value),
              is_vectorizable && types::is_vectorizable<E>::value &&

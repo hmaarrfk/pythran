@@ -215,30 +215,7 @@ namespace types
     {
       return std::get<I>(values);
     }
-
-    template <class T>
-    using push_front_t = pshape<T, Tys...>;
   };
-
-  template <size_t N, class... Tys>
-  struct make_pshape;
-
-  template <class... Tys>
-  struct make_pshape<0, Tys...> {
-    using type = pshape<Tys...>;
-  };
-
-  template <class... Tys>
-  struct make_pshape<1, Tys...> {
-    using type = pshape<long, Tys...>;
-  };
-
-  template <size_t N, class... Tys>
-  struct make_pshape : make_pshape<N - 1, Tys..., long> {
-  };
-
-  template <size_t N>
-  using make_pshape_t = typename make_pshape<N>::type;
 
   /* inspired by std::array implementation */
   template <typename T, size_t N>
@@ -254,9 +231,6 @@ namespace types
     using difference_type = std::ptrdiff_t;
     using reverse_iterator = std::reverse_iterator<iterator>;
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
-
-    template <class S>
-    using push_front_t = typename make_pshape_t<N>::template push_front_t<S>;
 
     // minimal ndarray interface
     using dtype = typename utils::nested_container_value_type<array>::type;
@@ -842,9 +816,6 @@ namespace sutils
   template <class T>
   using pop_tail_t = typename pop_tail<T>::type;
 
-  template <class P, class T>
-  struct push_front;
-
   template <class... Tys>
   types::array<long, sizeof...(Tys)> array(types::pshape<Tys...> const &pS)
   {
@@ -857,18 +828,6 @@ namespace sutils
     return pS;
   }
 
-  template <class... Tys, class T>
-  struct push_front<types::pshape<Tys...>, T> {
-    using type = types::pshape<T, Tys...>;
-  };
-  template <class T, size_t N, class S>
-  struct push_front<types::array<T, N>, S>
-      : push_front<types::make_pshape_t<N>, S> {
-  };
-
-  template <class P, class T>
-  using push_front_t = typename push_front<P, T>::type;
-
   template <class pS0, class pS1>
   struct concat;
 
@@ -877,13 +836,30 @@ namespace sutils
     using type = types::pshape<Ty0s..., Ty1s...>;
   };
 
+  template <class... Tys, class T>
+  struct concat<types::pshape<Tys...>, types::array<T, 0>> {
+    using type = types::pshape<Tys...>;
+  };
+  template <class... Tys, class T, size_t N>
+  struct concat<types::pshape<Tys...>, types::array<T, N>>
+      : concat<types::pshape<Tys..., T>, types::array<T, N - 1>> {
+  };
+
+  template <class T, class... Ty1s>
+  struct concat<types::array<T, 0>, types::pshape<Ty1s...>> {
+    using type = types::pshape<Ty1s...>;
+  };
+
   template <class T, size_t N, class... Ty1s>
   struct concat<types::array<T, N>, types::pshape<Ty1s...>>
-      : concat<types::make_pshape_t<N>, types::pshape<Ty1s...>> {
+      : concat<types::array<T, N - 1>, types::pshape<T, Ty1s...>> {
   };
 
   template <class... Tys>
   using concat_t = typename concat<Tys...>::type;
+
+  template <class P, class T>
+  using push_front_t = concat_t<types::pshape<T>, P>;
 
   template <class S>
   long *find(S &s, long v, std::integral_constant<size_t, 0>)

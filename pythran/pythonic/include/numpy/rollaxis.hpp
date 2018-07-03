@@ -9,7 +9,7 @@ PYTHONIC_NS_BEGIN
 namespace numpy
 {
   template <class T, class pS>
-  types::ndarray<T, types::make_pshape_t<std::tuple_size<pS>::value>>
+  types::ndarray<T, types::array<long, std::tuple_size<pS>::value>>
   rollaxis(types::ndarray<T, pS> const &a, long axis, long start = 0);
 
   NUMPY_EXPR_TO_NDARRAY0_DECL(rollaxis);

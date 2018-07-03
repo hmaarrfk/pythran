@@ -79,7 +79,7 @@ namespace types
     }
     template <class... S>
     auto operator()(S const &... slices) const
-        -> decltype(ndarray<dtype, make_pshape_t<value>>{*this}(slices...));
+        -> decltype(ndarray<dtype, array<long, value>>{*this}(slices...));
 
     auto operator[](long i) const -> decltype(data_[i])
     {
@@ -149,7 +149,7 @@ namespace types
 template <class T, class F>
 struct assignable<types::numpy_vexpr<T, F>> {
   using type = types::ndarray<typename types::dtype_of<T>::type,
-                              types::make_pshape_t<T::value>>;
+                              typename types::numpy_vexpr<T, F>::shape_t>;
 };
 
 template <class T, class F>

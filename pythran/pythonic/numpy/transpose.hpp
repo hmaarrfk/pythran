@@ -51,7 +51,7 @@ namespace numpy
       return iter;
     }
     template <class T, class pS>
-    types::ndarray<T, types::make_pshape_t<std::tuple_size<pS>::value>>
+    types::ndarray<T, types::array<long, std::tuple_size<pS>::value>>
     _transpose(types::ndarray<T, pS> const &a,
                long const l[std::tuple_size<pS>::value])
     {
@@ -64,7 +64,7 @@ namespace numpy
       for (long i = 0; i < std::tuple_size<pS>::value; ++i)
         perm[l[i]] = i;
 
-      types::ndarray<T, types::make_pshape_t<std::tuple_size<pS>::value>>
+      types::ndarray<T, types::array<long, std::tuple_size<pS>::value>>
           new_array(shp, __builtin__::None);
 
       auto const *iter = a.buffer;
@@ -76,7 +76,7 @@ namespace numpy
   }
 
   template <class T, class pS>
-  types::ndarray<T, types::make_pshape_t<std::tuple_size<pS>::value>>
+  types::ndarray<T, types::array<long, std::tuple_size<pS>::value>>
   transpose(types::ndarray<T, pS> const &a)
   {
     long t[std::tuple_size<pS>::value];
@@ -86,7 +86,7 @@ namespace numpy
   }
 
   template <class T, class pS, size_t M>
-  types::ndarray<T, types::make_pshape_t<std::tuple_size<pS>::value>>
+  types::ndarray<T, types::array<long, std::tuple_size<pS>::value>>
   transpose(types::ndarray<T, pS> const &a, types::array<long, M> const &t)
   {
     static_assert(std::tuple_size<pS>::value == M, "axes don't match array");

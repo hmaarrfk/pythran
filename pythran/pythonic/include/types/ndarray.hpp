@@ -395,8 +395,7 @@ namespace types
 #endif
 
     /* slice indexing */
-    ndarray<T, typename pS::template push_front_t<
-                   std::integral_constant<size_t, 1>>>
+    ndarray<T, sutils::push_front_t<pS, std::integral_constant<size_t, 1>>>
     operator[](none_type) const;
 
     numpy_gexpr<ndarray const &, normalized_slice>

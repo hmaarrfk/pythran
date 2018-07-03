@@ -30,26 +30,19 @@ namespace numpy
   template <class E>
   auto asarray(E &&e, types::none_type d) -> decltype(
       _asarray<typename std::decay<E>::type,
-               types::dtype_t<typename utils::nested_container_value_type<
-                   typename std::decay<E>::type>::type>>{}(
-          std::forward<E>(e),
-          types::dtype_t<typename utils::nested_container_value_type<
-              typename std::decay<E>::type>::type>{}))
+               typename std::decay<E>::type::dtype>{}(std::forward<E>(e)))
   {
     return _asarray<typename std::decay<E>::type,
-                    types::dtype_t<typename utils::nested_container_value_type<
-                        typename std::decay<E>::type>::type>>{}(
-        std::forward<E>(e),
-        types::dtype_t<typename utils::nested_container_value_type<
-            typename std::decay<E>::type>::type>{});
+                    typename std::decay<E>::type::dtype>{}(std::forward<E>(e));
   }
 
   template <class E, class dtype>
-  auto asarray(E &&e, dtype d) -> decltype(
-      _asarray<typename std::decay<E>::type, dtype>{}(std::forward<E>(e), d))
+  auto asarray(E &&e, dtype d)
+      -> decltype(_asarray<typename std::decay<E>::type,
+                           typename dtype::type>{}(std::forward<E>(e), d))
   {
-    return _asarray<typename std::decay<E>::type, dtype>{}(std::forward<E>(e),
-                                                           d);
+    return _asarray<typename std::decay<E>::type, typename dtype::type>{}(
+        std::forward<E>(e), d);
   }
 
   DEFINE_FUNCTOR(pythonic::numpy, asarray);

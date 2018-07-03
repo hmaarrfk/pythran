@@ -13,7 +13,7 @@ namespace numpy
 {
   template <class T, class dtype>
   types::ndarray<typename dtype::type,
-                 types::make_pshape_t<std::decay<T>::type::value>>
+                 types::array<long, std::decay<T>::type::value>>
   array(T &&iterable, dtype d)
   {
     return {std::forward<T>(iterable)};

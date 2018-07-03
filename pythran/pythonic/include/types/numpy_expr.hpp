@@ -643,10 +643,9 @@ namespace types
 
 template <class Op, class... Args>
 struct assignable<types::numpy_expr<Op, Args...>> {
-  using type =
-      types::ndarray<typename pythonic::types::numpy_expr<Op, Args...>::dtype,
-                     pythonic::types::make_pshape_t<
-                         pythonic::types::numpy_expr<Op, Args...>::value>>;
+  using type = types::ndarray<
+      typename pythonic::types::numpy_expr<Op, Args...>::dtype,
+      typename pythonic::types::numpy_expr<Op, Args...>::shape_t>;
 };
 
 template <class Op, class... Arg>
@@ -693,8 +692,8 @@ struct __combined<pythonic::types::numpy_expr<Op, Args...>,
                   pythonic::types::numpy_expr<Op2, Args2...>> {
   using type = pythonic::types::ndarray<
       typename pythonic::types::numpy_expr<Op, Args...>::dtype,
-      pythonic::types::make_pshape_t<
-          pythonic::types::numpy_expr<Op, Args...>::value>>;
+      pythonic::types::array<long,
+                             pythonic::types::numpy_expr<Op, Args...>::value>>;
 };
 template <class E, class Op, class... Args>
 struct __combined<pythonic::types::numpy_iexpr<E>,

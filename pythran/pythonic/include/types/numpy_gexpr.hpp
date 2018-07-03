@@ -61,8 +61,8 @@ namespace types
   /* helper to build a new shape out of a shape && a slice with new axis
    */
   template <size_t N, class pS, size_t C>
-  make_pshape_t<N> make_reshape(pS const &shape,
-                                array<bool, C> const &is_new_axis);
+  array<long, N> make_reshape(pS const &shape,
+                              array<bool, C> const &is_new_axis);
 
   /* helper to build an extended slice aka numpy_gexpr out of a subscript
    */
@@ -70,12 +70,12 @@ namespace types
   struct extended_slice {
     template <class T, class pS, class... S>
     auto operator()(ndarray<T, pS> &&a, S const &... s) -> decltype(
-        std::declval<ndarray<T, sutils::concat_t<pS, make_pshape_t<C>>>>()(
+        std::declval<ndarray<T, array<long, std::tuple_size<pS>::value + C>>>()(
             std::declval<typename to_slice<S>::type>()...));
 
     template <class T, class pS, class... S>
     auto operator()(ndarray<T, pS> const &a, S const &... s) -> decltype(
-        std::declval<ndarray<T, sutils::concat_t<pS, make_pshape_t<C>>>>()(
+        std::declval<ndarray<T, array<long, std::tuple_size<pS>::value + C>>>()(
             std::declval<typename to_slice<S>::type>()...));
   };
 
@@ -730,7 +730,7 @@ namespace types
 
     long flat_size() const;
     long size() const;
-    ndarray<dtype, make_pshape_t<value>> copy() const
+    ndarray<dtype, shape_t> copy() const
     {
       return {*this};
     }

@@ -5,7 +5,6 @@
 
 #include "pythonic/utils/functor.hpp"
 #include "pythonic/types/ndarray.hpp"
-#include "pythonic/include/numpy/asarray.hpp"
 #include "pythonic/__builtin__/sum.hpp"
 #include "pythonic/__builtin__/ValueError.hpp"
 
@@ -118,25 +117,27 @@ namespace numpy
   }
 
   template <class E, size_t M>
-  auto concatenate(types::array<E, M> const &args, long axis)
-      -> decltype(asarray(std::get<0>(args)))
+  types::ndarray<typename E::dtype, types::array<long, E::value>>
+  concatenate(types::array<E, M> const &args, long axis)
   {
     using T = typename E::dtype;
     auto constexpr N = E::value;
     auto shape = sutils::array(std::get<0>(args).shape());
     shape[axis] = details::concatenate_axis_size(
         args, axis, utils::make_index_sequence<M>{});
-    decltype(asarray(std::get<0>(args))) out(shape, types::none_type{});
+    types::ndarray<typename E::dtype, types::array<long, E::value>> out(
+        shape, types::none_type{});
     details::concatenate_helper<N>()(out, args, axis,
                                      utils::make_index_sequence<M>{});
     return out;
   }
 
   template <class E>
-  auto concatenate(types::list<E> const &ai, long axis)
-      -> decltype(asarray(std::get<0>(ai)))
+  types::ndarray<typename E::dtype, types::array<long, E::value>>
+  concatenate(types::list<E> const &ai, long axis)
   {
-    using return_type = decltype(asarray(std::get<0>(ai)));
+    using return_type =
+        types::ndarray<typename E::dtype, types::array<long, E::value>>;
     using T = typename return_type::dtype;
     auto constexpr N = return_type::value;
     auto shape = sutils::array(ai[0].shape());

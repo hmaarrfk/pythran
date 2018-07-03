@@ -218,7 +218,7 @@ namespace types
       return {buffer, new_shape};
     }
 
-    ndarray<dtype, make_pshape_t<value>> copy() const
+    ndarray<dtype, shape_t> copy() const
     {
       return {*this};
     }
