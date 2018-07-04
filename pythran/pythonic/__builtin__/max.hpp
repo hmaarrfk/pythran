@@ -20,7 +20,6 @@ namespace __builtin__
         operator_::functor::lt{}, std::forward<Types>(values)...);
   }
 
-  DEFINE_FUNCTOR(pythonic::__builtin__, max);
 }
 PYTHONIC_NS_END
 

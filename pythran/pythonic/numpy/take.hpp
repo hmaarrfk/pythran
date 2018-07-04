@@ -14,7 +14,6 @@ namespace numpy
     return expr[indices];
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, take);
 }
 PYTHONIC_NS_END
 

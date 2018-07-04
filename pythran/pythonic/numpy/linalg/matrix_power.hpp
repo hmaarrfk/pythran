@@ -55,7 +55,6 @@ namespace numpy
       throw pythonic::__builtin__::NotImplementedError("negative power");
     }
 
-    DEFINE_FUNCTOR(pythonic::numpy::linalg, matrix_power);
   }
 }
 PYTHONIC_NS_END

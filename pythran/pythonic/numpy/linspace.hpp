@@ -16,7 +16,6 @@ namespace numpy
     return arange(start, stop + (endpoint ? step * .5 : 0), step);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, linspace);
 }
 PYTHONIC_NS_END
 

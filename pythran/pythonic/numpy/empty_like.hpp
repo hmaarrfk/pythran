@@ -23,7 +23,6 @@ namespace numpy
     return empty(expr.shape(), types::dtype_t<typename E::dtype>());
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, empty_like)
 }
 PYTHONIC_NS_END
 

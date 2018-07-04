@@ -9,7 +9,7 @@ namespace operator_
 {
   bool truth(bool const &a);
 
-  DECLARE_FUNCTOR(pythonic::operator_, truth);
+  DEFDECLARE_FUNCTOR(pythonic::operator_, truth);
 }
 PYTHONIC_NS_END
 

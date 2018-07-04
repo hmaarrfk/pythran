@@ -12,7 +12,7 @@ namespace numpy
   template <class U, class V>
   bool array_equal(U const &u, V const &v);
 
-  DECLARE_FUNCTOR(pythonic::numpy, array_equal);
+  DEFDECLARE_FUNCTOR(pythonic::numpy, array_equal);
 }
 PYTHONIC_NS_END
 

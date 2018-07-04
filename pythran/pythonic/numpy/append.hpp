@@ -48,7 +48,6 @@ namespace numpy
                   data);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, append);
 }
 PYTHONIC_NS_END
 

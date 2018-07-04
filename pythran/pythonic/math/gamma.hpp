@@ -15,7 +15,6 @@ namespace math
     return std::tgamma(x);
   }
 
-  DEFINE_FUNCTOR(pythonic::math, gamma);
 }
 PYTHONIC_NS_END
 

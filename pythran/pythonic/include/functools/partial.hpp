@@ -57,7 +57,7 @@ namespace functools
       typename std::remove_reference<Types>::type>::type...>
   partial(Types &&... types);
 
-  DECLARE_FUNCTOR(pythonic::functools, partial);
+  DEFDECLARE_FUNCTOR(pythonic::functools, partial);
 }
 PYTHONIC_NS_END
 

@@ -30,7 +30,6 @@ namespace numpy
     return temp.reshape(new_shape);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, vstack);
 }
 PYTHONIC_NS_END
 

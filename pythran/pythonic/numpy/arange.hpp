@@ -35,7 +35,6 @@ namespace numpy
     return arange<T, T, T, types::dtype_t<T>>(T(0), end);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, arange);
 }
 PYTHONIC_NS_END
 

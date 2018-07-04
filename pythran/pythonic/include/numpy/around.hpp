@@ -33,7 +33,7 @@ namespace numpy
   auto around(types::list<E> const &a, long decimals)
       -> decltype(around(functor::asarray{}(a), decimals));
 
-  DECLARE_FUNCTOR(pythonic::numpy, around);
+  DEFDECLARE_FUNCTOR(pythonic::numpy, around);
 }
 PYTHONIC_NS_END
 

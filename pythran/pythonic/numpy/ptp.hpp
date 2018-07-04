@@ -23,7 +23,6 @@ namespace numpy
     return max(expr) - min(expr);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, ptp);
 }
 PYTHONIC_NS_END
 

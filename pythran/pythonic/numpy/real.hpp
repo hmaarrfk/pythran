@@ -26,7 +26,6 @@ namespace numpy
     return real(numpy::functor::asarray{}(expr));
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, real);
 }
 PYTHONIC_NS_END
 

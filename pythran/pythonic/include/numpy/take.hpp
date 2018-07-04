@@ -9,7 +9,7 @@ namespace numpy
   auto take(T &&expr, F &&indices)
       -> decltype(std::forward<T>(expr)[std::forward<F>(indices)]);
 
-  DECLARE_FUNCTOR(pythonic::numpy, take);
+  DEFDECLARE_FUNCTOR(pythonic::numpy, take);
 }
 PYTHONIC_NS_END
 

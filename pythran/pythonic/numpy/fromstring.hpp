@@ -52,7 +52,6 @@ namespace numpy
     }
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, fromstring);
 }
 PYTHONIC_NS_END
 

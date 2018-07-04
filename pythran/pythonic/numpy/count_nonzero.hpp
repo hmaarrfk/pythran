@@ -46,7 +46,6 @@ namespace numpy
     return count;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, count_nonzero);
 }
 PYTHONIC_NS_END
 

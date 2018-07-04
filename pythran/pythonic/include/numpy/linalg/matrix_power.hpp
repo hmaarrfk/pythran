@@ -12,7 +12,7 @@ namespace numpy
     auto matrix_power(E const &expr, int n)
         -> decltype(numpy::functor::array{}(expr));
 
-    DECLARE_FUNCTOR(pythonic::numpy::linalg, matrix_power);
+    DEFDECLARE_FUNCTOR(pythonic::numpy::linalg, matrix_power);
   }
 }
 PYTHONIC_NS_END

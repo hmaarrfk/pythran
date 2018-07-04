@@ -52,7 +52,6 @@ namespace numpy
     return out;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, unwrap)
 }
 PYTHONIC_NS_END
 

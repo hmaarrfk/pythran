@@ -39,7 +39,6 @@ namespace numpy
       return std::poisson_distribution<long>{lam}(details::generator);
     }
 
-    DEFINE_FUNCTOR(pythonic::numpy::random, poisson);
   }
 }
 PYTHONIC_NS_END

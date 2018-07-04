@@ -14,7 +14,7 @@ namespace numpy
 
     double rand();
 
-    DECLARE_FUNCTOR(pythonic::numpy::random, rand);
+    DEFDECLARE_FUNCTOR(pythonic::numpy::random, rand);
   }
 }
 PYTHONIC_NS_END

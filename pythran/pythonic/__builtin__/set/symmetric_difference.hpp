@@ -34,7 +34,6 @@ namespace __builtin__
       return other;
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::set, symmetric_difference);
   }
 }
 PYTHONIC_NS_END

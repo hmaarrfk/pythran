@@ -19,7 +19,6 @@ namespace numpy
     return {std::forward<T>(iterable)};
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, array);
 }
 PYTHONIC_NS_END
 

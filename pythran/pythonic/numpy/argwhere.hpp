@@ -41,7 +41,6 @@ namespace numpy
     return {buffer, shape};
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, argwhere);
 }
 PYTHONIC_NS_END
 

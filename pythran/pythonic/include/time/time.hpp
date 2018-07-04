@@ -10,7 +10,7 @@ namespace time
 
   double time();
 
-  DECLARE_FUNCTOR(pythonic::time, time)
+  DEFDECLARE_FUNCTOR(pythonic::time, time)
 }
 PYTHONIC_NS_END
 

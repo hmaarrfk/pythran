@@ -12,7 +12,7 @@ namespace __builtin__
 
   types::list<long> range(long b, long e, long s = 1);
 
-  DECLARE_FUNCTOR(pythonic::__builtin__, range);
+  DEFDECLARE_FUNCTOR(pythonic::__builtin__, range);
 }
 PYTHONIC_NS_END
 

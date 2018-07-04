@@ -16,7 +16,6 @@ namespace numpy
     return functor::sqrt{}(var(std::forward<Args>(args)...));
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, std_);
 }
 PYTHONIC_NS_END
 

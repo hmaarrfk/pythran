@@ -15,7 +15,6 @@ namespace random
     return std::exponential_distribution<>(l)(__random_generator);
   }
 
-  DEFINE_FUNCTOR(pythonic::random, expovariate);
 }
 PYTHONIC_NS_END
 

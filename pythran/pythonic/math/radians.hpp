@@ -16,7 +16,6 @@ namespace math
     return (x * 2. * pi) / 360.;
   }
 
-  DEFINE_FUNCTOR(pythonic::math, radians);
 }
 PYTHONIC_NS_END
 

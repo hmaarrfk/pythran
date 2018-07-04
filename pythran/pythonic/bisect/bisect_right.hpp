@@ -23,7 +23,6 @@ namespace bisect
     return bisect(x, a, lo, hi);
   }
 
-  DEFINE_FUNCTOR(pythonic::bisect, bisect_right);
 }
 PYTHONIC_NS_END
 

@@ -21,7 +21,6 @@ namespace numpy
                                                 std::forward<Opts>(opts)...);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, cumsum);
 }
 PYTHONIC_NS_END
 

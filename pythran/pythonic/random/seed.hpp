@@ -25,7 +25,6 @@ namespace random
     return __builtin__::None;
   }
 
-  DEFINE_FUNCTOR(pythonic::random, seed);
 }
 PYTHONIC_NS_END
 

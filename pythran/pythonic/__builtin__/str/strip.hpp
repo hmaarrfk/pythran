@@ -25,7 +25,6 @@ namespace __builtin__
                           self.begin() + self.find_last_not_of(to_del) + 1);
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::str, strip);
   }
 }
 PYTHONIC_NS_END

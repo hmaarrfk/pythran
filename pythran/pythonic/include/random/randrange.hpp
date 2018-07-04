@@ -14,7 +14,7 @@ namespace random
   long randrange(long start, long stop);
   long randrange(long start, long stop, long step);
 
-  DECLARE_FUNCTOR(pythonic::random, randrange)
+  DEFDECLARE_FUNCTOR(pythonic::random, randrange)
 }
 PYTHONIC_NS_END
 

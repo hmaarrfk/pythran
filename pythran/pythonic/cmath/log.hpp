@@ -18,7 +18,6 @@ namespace cmath
     return log(x) / log(base);
   }
 
-  DEFINE_FUNCTOR(pythonic::cmath, log);
 }
 PYTHONIC_NS_END
 

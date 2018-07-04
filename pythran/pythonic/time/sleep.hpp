@@ -19,7 +19,6 @@ namespace time
     return __builtin__::None;
   }
 
-  DEFINE_FUNCTOR(pythonic::time, sleep)
 }
 PYTHONIC_NS_END
 

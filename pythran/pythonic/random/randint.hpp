@@ -17,7 +17,6 @@ namespace random
     return randrange(a, b + 1);
   }
 
-  DEFINE_FUNCTOR(pythonic::random, randint);
 }
 PYTHONIC_NS_END
 

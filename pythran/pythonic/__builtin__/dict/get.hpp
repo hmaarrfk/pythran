@@ -33,7 +33,6 @@ namespace __builtin__
       return default_;
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::dict, get);
   }
 }
 PYTHONIC_NS_END

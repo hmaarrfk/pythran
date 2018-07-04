@@ -17,7 +17,6 @@ namespace numpy
     return e.shape();
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, shape)
 }
 PYTHONIC_NS_END
 

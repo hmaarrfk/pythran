@@ -13,7 +13,7 @@ namespace __builtin__
   template <class T>
   auto next(T &&y) -> decltype(*y);
 
-  DECLARE_FUNCTOR(pythonic::__builtin__, next);
+  DEFDECLARE_FUNCTOR(pythonic::__builtin__, next);
 }
 PYTHONIC_NS_END
 

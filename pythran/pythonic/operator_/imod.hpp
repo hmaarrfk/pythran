@@ -21,7 +21,6 @@ namespace operator_
     return a %= b;
   }
 
-  DEFINE_FUNCTOR(pythonic::operator_, imod);
 }
 PYTHONIC_NS_END
 

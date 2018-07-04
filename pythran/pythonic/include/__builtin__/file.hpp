@@ -16,7 +16,7 @@ namespace __builtin__
                      types::str const &strmode = "r");
   }
 
-  DECLARE_FUNCTOR(pythonic::__builtin__::anonymous, file);
+  DEFDECLARE_FUNCTOR(pythonic::__builtin__::anonymous, file);
 }
 PYTHONIC_NS_END
 

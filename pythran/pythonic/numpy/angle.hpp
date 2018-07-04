@@ -29,7 +29,6 @@ namespace numpy
     return functor::angle_in_rad()(t);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, angle);
 }
 PYTHONIC_NS_END
 

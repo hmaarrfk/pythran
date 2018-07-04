@@ -25,7 +25,6 @@ namespace numpy
     return out;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, tri)
 }
 PYTHONIC_NS_END
 

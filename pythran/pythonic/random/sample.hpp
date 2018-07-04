@@ -29,7 +29,6 @@ namespace random
     return out;
   }
 
-  DEFINE_FUNCTOR(pythonic::random, sample);
 }
 PYTHONIC_NS_END
 

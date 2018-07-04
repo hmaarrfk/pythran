@@ -10,7 +10,7 @@ namespace time
 {
   types::none_type sleep(double const value);
 
-  DECLARE_FUNCTOR(pythonic::time, sleep)
+  DEFDECLARE_FUNCTOR(pythonic::time, sleep)
 }
 PYTHONIC_NS_END
 

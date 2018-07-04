@@ -24,7 +24,6 @@ namespace __builtin__
       throw types::StopIteration();
   }
 
-  DEFINE_FUNCTOR(pythonic::__builtin__, next);
 }
 PYTHONIC_NS_END
 

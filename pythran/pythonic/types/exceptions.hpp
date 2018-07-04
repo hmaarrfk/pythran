@@ -81,7 +81,6 @@ PYTHONIC_NS_END
     return types::name(args...);                                               \
   }                                                                            \
                                                                                \
-  DEFINE_FUNCTOR(pythonic::__builtin__, name);
 
 /* pythran attribute system { */
 #define IMPL_EXCEPTION_GETATTR(name)                                           \

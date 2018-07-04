@@ -67,7 +67,6 @@ namespace __builtin__
     return details::map(op, std::forward<List0>(seq), lists.begin()...);
   }
 
-  DEFINE_FUNCTOR(pythonic::__builtin__, map);
 }
 PYTHONIC_NS_END
 

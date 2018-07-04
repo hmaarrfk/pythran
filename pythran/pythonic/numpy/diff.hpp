@@ -40,7 +40,6 @@ namespace numpy
                   n - 1); // TODO: inplace modification to avoid n-1 allocations
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, diff);
 }
 PYTHONIC_NS_END
 

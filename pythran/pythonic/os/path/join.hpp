@@ -65,7 +65,6 @@ namespace os
       return p;
     }
 
-    DEFINE_FUNCTOR(pythonic::os::path, join);
   }
 }
 PYTHONIC_NS_END

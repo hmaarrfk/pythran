@@ -38,7 +38,6 @@ namespace __builtin__
     return reinterpret_cast<uintptr_t>(&t);
   }
 
-  DEFINE_FUNCTOR(pythonic::__builtin__, id);
 }
 PYTHONIC_NS_END
 

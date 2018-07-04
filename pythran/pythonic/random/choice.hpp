@@ -17,7 +17,6 @@ namespace random
     return seq[long(random() * seq.size())];
   }
 
-  DEFINE_FUNCTOR(pythonic::random, choice);
 }
 PYTHONIC_NS_END
 

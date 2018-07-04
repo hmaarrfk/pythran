@@ -16,7 +16,6 @@ namespace __dispatch__
     return any.pop(std::forward<Arg0>(arg0)...);
   }
 
-  DEFINE_FUNCTOR(pythonic::__dispatch__, pop);
 }
 PYTHONIC_NS_END
 

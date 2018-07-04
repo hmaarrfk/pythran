@@ -10,7 +10,7 @@ PYTHONIC_NS_BEGIN
 
 namespace cmath
 {
-  DECLARE_FUNCTOR_2(isnan, std::isnan);
+  DEFDECLARE_FUNCTOR_2(isnan, std::isnan);
 }
 PYTHONIC_NS_END
 

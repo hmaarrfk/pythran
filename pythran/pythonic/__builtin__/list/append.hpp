@@ -29,7 +29,6 @@ namespace __builtin__
       return __builtin__::None;
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::list, append);
   }
 }
 PYTHONIC_NS_END

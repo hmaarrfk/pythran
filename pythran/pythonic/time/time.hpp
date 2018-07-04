@@ -20,7 +20,6 @@ namespace time
            1000.;
   }
 
-  DEFINE_FUNCTOR(pythonic::time, time)
 }
 PYTHONIC_NS_END
 

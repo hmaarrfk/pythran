@@ -23,7 +23,6 @@ namespace __builtin__
       return {d.item_begin(), d.item_end()};
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::dict, items);
   }
 }
 PYTHONIC_NS_END

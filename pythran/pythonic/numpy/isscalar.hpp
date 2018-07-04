@@ -19,7 +19,6 @@ namespace numpy
     return types::is_dtype<E>::value || std::is_same<E, types::str>::value;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, isscalar);
 }
 PYTHONIC_NS_END
 

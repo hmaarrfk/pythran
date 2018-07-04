@@ -29,7 +29,6 @@ namespace numpy
     return ediff1d(asarray(expr));
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, ediff1d);
 }
 PYTHONIC_NS_END
 

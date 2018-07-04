@@ -26,7 +26,7 @@ namespace __builtin__
     dict(Iterable &&iterable);
   }
 
-  DECLARE_FUNCTOR(pythonic::__builtin__::anonymous, dict);
+  DEFDECLARE_FUNCTOR(pythonic::__builtin__::anonymous, dict);
 }
 PYTHONIC_NS_END
 

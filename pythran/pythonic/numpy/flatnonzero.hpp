@@ -39,7 +39,6 @@ namespace numpy
     return types::ndarray<long, types::pshape<long>>(std::move(buffer), shape);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, flatnonzero);
 }
 PYTHONIC_NS_END
 

@@ -28,7 +28,6 @@ namespace __builtin__
       return D;
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::dict, fromkeys);
   }
 }
 PYTHONIC_NS_END

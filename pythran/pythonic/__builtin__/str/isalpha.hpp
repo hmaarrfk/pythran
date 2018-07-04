@@ -20,7 +20,6 @@ namespace __builtin__
              std::all_of(s.begin(), s.end(), (int (*)(int))std::isalpha);
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::str, isalpha)
   }
 }
 PYTHONIC_NS_END

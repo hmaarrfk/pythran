@@ -24,7 +24,6 @@ namespace cmath
     return std::cos(v);
   }
 
-  DEFINE_FUNCTOR(pythonic::cmath, cos);
 }
 PYTHONIC_NS_END
 

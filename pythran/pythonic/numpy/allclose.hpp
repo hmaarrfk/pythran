@@ -49,7 +49,6 @@ namespace numpy
                      utils::int_<U::value>());
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, allclose);
 }
 PYTHONIC_NS_END
 

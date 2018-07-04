@@ -47,7 +47,6 @@ namespace __builtin__
       }
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::str, replace);
   }
 }
 PYTHONIC_NS_END

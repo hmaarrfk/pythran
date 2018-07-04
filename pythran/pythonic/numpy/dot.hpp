@@ -445,7 +445,6 @@ namespace numpy
     return out;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, dot);
 }
 PYTHONIC_NS_END
 

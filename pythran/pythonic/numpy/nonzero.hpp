@@ -76,7 +76,6 @@ namespace numpy
     return out;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, nonzero)
 }
 PYTHONIC_NS_END
 

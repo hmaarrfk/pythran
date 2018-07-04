@@ -33,7 +33,6 @@ namespace numpy
     return average(weighted_expr);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, average);
 }
 PYTHONIC_NS_END
 

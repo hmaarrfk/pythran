@@ -16,7 +16,6 @@ namespace omp
     return omp_in_parallel();
   }
 
-  DEFINE_FUNCTOR(pythonic::omp, in_parallel);
 }
 PYTHONIC_NS_END
 

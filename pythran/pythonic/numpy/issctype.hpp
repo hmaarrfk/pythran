@@ -27,7 +27,6 @@ namespace numpy
     return false;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, issctype);
 }
 PYTHONIC_NS_END
 

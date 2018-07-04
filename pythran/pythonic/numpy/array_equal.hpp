@@ -20,7 +20,6 @@ namespace numpy
     return false;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, array_equal);
 }
 PYTHONIC_NS_END
 

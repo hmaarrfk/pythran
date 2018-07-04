@@ -16,7 +16,6 @@ namespace operator_
     return a.index(b);
   }
 
-  DEFINE_FUNCTOR(pythonic::operator_, indexOf);
 }
 PYTHONIC_NS_END
 

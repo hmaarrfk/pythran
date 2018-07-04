@@ -21,7 +21,6 @@ namespace numpy
     return *asarray(expr).fbegin();
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, asscalar);
 }
 PYTHONIC_NS_END
 

@@ -53,7 +53,6 @@ namespace numpy
     return a.arg.copy();
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, copy);
 }
 PYTHONIC_NS_END
 

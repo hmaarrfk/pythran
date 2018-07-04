@@ -12,7 +12,7 @@ namespace random
   template <class Seq>
   typename Seq::value_type choice(Seq const &seq);
 
-  DECLARE_FUNCTOR(pythonic::random, choice);
+  DEFDECLARE_FUNCTOR(pythonic::random, choice);
 }
 PYTHONIC_NS_END
 

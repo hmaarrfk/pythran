@@ -28,7 +28,6 @@ namespace numpy
       return __builtin__::None;
     }
 
-    DEFINE_FUNCTOR(pythonic::numpy::ndarray, fill);
   }
 }
 PYTHONIC_NS_END

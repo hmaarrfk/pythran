@@ -116,7 +116,6 @@ namespace numpy
     return {args};
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, ndindex);
 }
 PYTHONIC_NS_END
 

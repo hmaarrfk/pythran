@@ -96,7 +96,6 @@ namespace numpy
     }
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, any);
 }
 PYTHONIC_NS_END
 

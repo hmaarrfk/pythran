@@ -39,7 +39,6 @@ namespace numpy
       return std::normal_distribution<double>{loc, scale}(details::generator);
     }
 
-    DEFINE_FUNCTOR(pythonic::numpy::random, normal);
   }
 }
 PYTHONIC_NS_END

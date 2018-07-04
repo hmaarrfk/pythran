@@ -28,7 +28,6 @@ namespace numpy
       return randint(min, max + 1);
     }
 
-    DEFINE_FUNCTOR(pythonic::numpy::random, random_integers);
   }
 }
 PYTHONIC_NS_END

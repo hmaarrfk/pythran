@@ -41,7 +41,6 @@ namespace numpy
     return argminmax<argmax_op<E>>(expr, axis);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, argmax);
 }
 PYTHONIC_NS_END
 

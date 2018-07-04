@@ -29,7 +29,6 @@ namespace numpy
     return make_gexpr(expr, types::contiguous_slice(begin, end));
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, trim_zeros)
 }
 PYTHONIC_NS_END
 

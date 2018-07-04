@@ -62,7 +62,6 @@ namespace numpy
     return out;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, lexsort)
 }
 PYTHONIC_NS_END
 

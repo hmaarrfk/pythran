@@ -71,7 +71,6 @@ namespace __builtin__
     }
   }
 
-  DEFINE_FUNCTOR(pythonic::__builtin__::anonymous, str);
 }
 PYTHONIC_NS_END
 

@@ -20,7 +20,6 @@ namespace math
     return std::make_tuple(frac, i);
   }
 
-  DEFINE_FUNCTOR(pythonic::math, modf);
 }
 PYTHONIC_NS_END
 

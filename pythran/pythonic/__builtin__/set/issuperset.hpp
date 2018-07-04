@@ -26,7 +26,6 @@ namespace __builtin__
       return false;
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::set, issuperset);
   }
 }
 PYTHONIC_NS_END

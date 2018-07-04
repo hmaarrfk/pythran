@@ -107,7 +107,6 @@ namespace __builtin__
       return out;
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::str, join);
   }
 }
 PYTHONIC_NS_END

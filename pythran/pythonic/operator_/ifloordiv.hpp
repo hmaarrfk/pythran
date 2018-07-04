@@ -23,7 +23,6 @@ namespace operator_
     return (a - a % b) / b;
   }
 
-  DEFINE_FUNCTOR(pythonic::operator_, ifloordiv);
 }
 PYTHONIC_NS_END
 

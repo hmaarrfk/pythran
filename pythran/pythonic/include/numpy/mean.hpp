@@ -18,7 +18,7 @@ namespace numpy
   auto mean(E const &expr, long axis, dtype d = dtype())
       -> decltype(sum(expr, axis));
 
-  DECLARE_FUNCTOR(pythonic::numpy, mean);
+  DEFDECLARE_FUNCTOR(pythonic::numpy, mean);
 }
 PYTHONIC_NS_END
 

@@ -8,7 +8,7 @@ PYTHONIC_NS_BEGIN
 
 namespace math
 {
-  DECLARE_FUNCTOR_2(asin, std::asin);
+  DEFDECLARE_FUNCTOR_2(asin, std::asin);
 }
 PYTHONIC_NS_END
 

@@ -68,7 +68,6 @@ namespace numpy
     return out;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, searchsorted);
 }
 PYTHONIC_NS_END
 

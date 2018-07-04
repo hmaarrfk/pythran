@@ -36,7 +36,6 @@ namespace numpy
     throw std::runtime_error("split only partially implemented");
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, split);
 }
 PYTHONIC_NS_END
 

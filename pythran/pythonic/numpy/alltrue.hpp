@@ -16,7 +16,6 @@ namespace numpy
     return all(std::forward<Types>(types)...);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, alltrue);
 }
 PYTHONIC_NS_END
 

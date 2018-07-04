@@ -49,7 +49,6 @@ namespace functools
     return {std::forward<Types>(types)...};
   }
 
-  DEFINE_FUNCTOR(pythonic::functools, partial);
 }
 PYTHONIC_NS_END
 

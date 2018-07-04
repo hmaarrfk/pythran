@@ -56,7 +56,6 @@ namespace __builtin__
     return res;
   }
 
-  DEFINE_FUNCTOR(pythonic::__builtin__, tuple);
 }
 PYTHONIC_NS_END
 

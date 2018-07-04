@@ -11,7 +11,7 @@ namespace numpy
   {
     types::str bytes(long length);
 
-    DECLARE_FUNCTOR(pythonic::numpy::random, bytes);
+    DEFDECLARE_FUNCTOR(pythonic::numpy::random, bytes);
   }
 }
 PYTHONIC_NS_END

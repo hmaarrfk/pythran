@@ -57,7 +57,6 @@ namespace random
     return __builtin__::None;
   }
 
-  DEFINE_FUNCTOR(pythonic::random, shuffle)
 }
 
 PYTHONIC_NS_END

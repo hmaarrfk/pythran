@@ -40,7 +40,7 @@ namespace numpy
           std::forward<F>(f), shape));
 
   /* TODO: must specialize for higher order */
-  DECLARE_FUNCTOR(pythonic::numpy, fromfunction);
+  DEFDECLARE_FUNCTOR(pythonic::numpy, fromfunction);
 }
 PYTHONIC_NS_END
 

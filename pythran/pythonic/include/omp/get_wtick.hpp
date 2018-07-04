@@ -10,7 +10,7 @@ namespace omp
 {
   long get_wtick();
 
-  DECLARE_FUNCTOR(pythonic::omp, get_wtick);
+  DEFDECLARE_FUNCTOR(pythonic::omp, get_wtick);
 }
 PYTHONIC_NS_END
 

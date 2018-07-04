@@ -17,7 +17,6 @@ namespace numpy
     return out;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, copyto);
 }
 PYTHONIC_NS_END
 

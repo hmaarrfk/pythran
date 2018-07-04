@@ -125,7 +125,6 @@ namespace itertools
     return {std::forward<Operator>(_op), std::forward<List0>(_seq)};
   }
 
-  DEFINE_FUNCTOR(pythonic::itertools, ifilter);
 }
 PYTHONIC_NS_END
 #endif

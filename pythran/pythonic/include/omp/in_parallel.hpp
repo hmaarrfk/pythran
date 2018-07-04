@@ -10,7 +10,7 @@ namespace omp
 {
   bool in_parallel();
 
-  DECLARE_FUNCTOR(pythonic::omp, in_parallel);
+  DEFDECLARE_FUNCTOR(pythonic::omp, in_parallel);
 }
 PYTHONIC_NS_END
 

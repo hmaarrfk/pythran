@@ -16,7 +16,6 @@ namespace __dispatch__
     return numpy::functor::conjugate{}(any);
   }
 
-  DEFINE_FUNCTOR(pythonic::__dispatch__, conjugate);
 }
 PYTHONIC_NS_END
 

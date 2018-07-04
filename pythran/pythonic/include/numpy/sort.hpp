@@ -15,7 +15,7 @@ namespace numpy
   sort(E const &expr, long axis = -1);
 
   NUMPY_EXPR_TO_NDARRAY0_DECL(sort);
-  DECLARE_FUNCTOR(pythonic::numpy, sort);
+  DEFDECLARE_FUNCTOR(pythonic::numpy, sort);
 }
 PYTHONIC_NS_END
 

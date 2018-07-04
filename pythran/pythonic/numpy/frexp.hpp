@@ -57,7 +57,6 @@ namespace numpy
     return std::make_tuple(significands, exps);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, frexp);
 }
 PYTHONIC_NS_END
 

@@ -42,7 +42,6 @@ namespace numpy
     return {res};
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, union1d)
 }
 PYTHONIC_NS_END
 

@@ -16,7 +16,6 @@ namespace operator_
     return a == b;
   }
 
-  DEFINE_FUNCTOR(pythonic::operator_, is_);
 }
 PYTHONIC_NS_END
 

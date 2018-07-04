@@ -14,7 +14,7 @@ namespace __builtin__
 
     types::str lower(types::str const &s);
 
-    DECLARE_FUNCTOR(pythonic::__builtin__::str, lower);
+    DEFDECLARE_FUNCTOR(pythonic::__builtin__::str, lower);
   }
 }
 PYTHONIC_NS_END

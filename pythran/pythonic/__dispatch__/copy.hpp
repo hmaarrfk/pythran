@@ -15,7 +15,6 @@ namespace __dispatch__
     return any.copy();
   }
 
-  DEFINE_FUNCTOR(pythonic::__dispatch__, copy);
 }
 PYTHONIC_NS_END
 

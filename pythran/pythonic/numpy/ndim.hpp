@@ -17,7 +17,6 @@ namespace numpy
     return __builtin__::getattr<types::attr::NDIM>(e);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, ndim)
 }
 PYTHONIC_NS_END
 

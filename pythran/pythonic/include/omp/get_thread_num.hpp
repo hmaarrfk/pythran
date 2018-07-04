@@ -11,7 +11,7 @@ namespace omp
 
   long get_thread_num();
 
-  DECLARE_FUNCTOR(pythonic::omp, get_thread_num);
+  DEFDECLARE_FUNCTOR(pythonic::omp, get_thread_num);
 }
 PYTHONIC_NS_END
 

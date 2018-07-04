@@ -15,7 +15,6 @@ namespace operator_
     return a / ((double)b);
   }
 
-  DEFINE_FUNCTOR(pythonic::operator_, truediv);
 }
 PYTHONIC_NS_END
 

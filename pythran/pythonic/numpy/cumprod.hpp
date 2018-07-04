@@ -23,7 +23,6 @@ namespace numpy
 
   NUMPY_EXPR_TO_NDARRAY0_IMPL(cumprod);
 
-  DEFINE_FUNCTOR(pythonic::numpy, cumprod);
 }
 PYTHONIC_NS_END
 

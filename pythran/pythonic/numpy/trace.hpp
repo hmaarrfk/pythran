@@ -32,7 +32,6 @@ namespace numpy
     return res;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, trace)
 }
 PYTHONIC_NS_END
 

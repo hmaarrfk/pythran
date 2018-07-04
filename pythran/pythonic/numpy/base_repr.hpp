@@ -50,7 +50,6 @@ namespace numpy
     return res;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, base_repr);
 }
 PYTHONIC_NS_END
 

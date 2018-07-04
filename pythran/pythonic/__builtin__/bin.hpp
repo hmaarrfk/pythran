@@ -32,7 +32,6 @@ namespace __builtin__
     }
   }
 
-  DEFINE_FUNCTOR(pythonic::__builtin__, bin);
 }
 PYTHONIC_NS_END
 

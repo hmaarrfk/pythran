@@ -30,7 +30,6 @@ namespace __builtin__
       return __builtin__::None;
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::set, add);
   }
 }
 PYTHONIC_NS_END

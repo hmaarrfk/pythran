@@ -16,7 +16,7 @@ namespace numpy
   template <class T>
   types::ndarray<T, types::pshape<long>> arange(T end);
 
-  DECLARE_FUNCTOR(pythonic::numpy, arange);
+  DEFDECLARE_FUNCTOR(pythonic::numpy, arange);
 }
 PYTHONIC_NS_END
 

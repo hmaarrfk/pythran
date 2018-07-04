@@ -39,7 +39,6 @@ namespace numpy
     return max;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, nanmax);
 }
 PYTHONIC_NS_END
 

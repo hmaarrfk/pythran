@@ -15,7 +15,6 @@ namespace omp
     return omp_get_wtick();
   }
 
-  DEFINE_FUNCTOR(pythonic::omp, get_wtick);
 }
 PYTHONIC_NS_END
 

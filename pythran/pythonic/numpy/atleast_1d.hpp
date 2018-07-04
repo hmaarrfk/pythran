@@ -26,7 +26,6 @@ namespace numpy
     return asarray(t);
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, atleast_1d);
 }
 PYTHONIC_NS_END
 

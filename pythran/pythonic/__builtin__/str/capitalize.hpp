@@ -26,7 +26,6 @@ namespace __builtin__
       }
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::str, capitalize);
   }
 }
 PYTHONIC_NS_END

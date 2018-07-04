@@ -52,7 +52,6 @@ namespace numpy
     return outer(asarray(a), asarray(b));
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, outer);
 }
 PYTHONIC_NS_END
 

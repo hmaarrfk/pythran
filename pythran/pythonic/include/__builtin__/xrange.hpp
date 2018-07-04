@@ -50,7 +50,7 @@ namespace __builtin__
     reverse_iterator rend() const;
   };
 
-  DECLARE_FUNCTOR(pythonic::__builtin__, xrange);
+  DEFDECLARE_FUNCTOR(pythonic::__builtin__, xrange);
 }
 PYTHONIC_NS_END
 

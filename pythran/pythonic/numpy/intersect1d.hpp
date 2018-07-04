@@ -39,7 +39,6 @@ namespace numpy
     return {lout};
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, intersect1d);
 }
 PYTHONIC_NS_END
 

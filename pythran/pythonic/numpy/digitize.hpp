@@ -51,7 +51,6 @@ namespace numpy
     return out;
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, digitize);
 }
 PYTHONIC_NS_END
 

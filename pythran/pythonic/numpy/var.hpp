@@ -76,7 +76,6 @@ namespace numpy
     }
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, var);
 }
 PYTHONIC_NS_END
 

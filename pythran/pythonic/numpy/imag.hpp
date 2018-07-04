@@ -26,7 +26,6 @@ namespace numpy
     return imag(numpy::functor::asarray{}(expr));
   }
 
-  DEFINE_FUNCTOR(pythonic::numpy, imag);
 }
 PYTHONIC_NS_END
 

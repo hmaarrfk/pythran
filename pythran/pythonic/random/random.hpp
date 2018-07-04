@@ -17,7 +17,6 @@ namespace random
     return uniform_distrib(__random_generator);
   }
 
-  DEFINE_FUNCTOR(pythonic::random, random);
 }
 PYTHONIC_NS_END
 

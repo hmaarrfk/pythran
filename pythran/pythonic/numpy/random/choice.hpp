@@ -117,7 +117,6 @@ namespace numpy
                     std::forward<P>(p));
     }
 
-    DEFINE_FUNCTOR(pythonic::numpy::random, choice);
   }
 }
 PYTHONIC_NS_END

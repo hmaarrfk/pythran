@@ -53,7 +53,6 @@ namespace __builtin__
       return fmter.str();
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::str, __mod__);
   }
 }
 PYTHONIC_NS_END

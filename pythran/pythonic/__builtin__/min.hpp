@@ -20,7 +20,6 @@ namespace __builtin__
         operator_::functor::gt{}, std::forward<Types>(values)...);
   }
 
-  DEFINE_FUNCTOR(pythonic::__builtin__, min);
 }
 PYTHONIC_NS_END
 

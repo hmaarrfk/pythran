@@ -22,7 +22,7 @@ namespace numpy
     template <class E>
     typename std::decay<E>::dtype item(E &&expr, long i);
 
-    DECLARE_FUNCTOR(pythonic::numpy::ndarray, item);
+    DEFDECLARE_FUNCTOR(pythonic::numpy::ndarray, item);
   }
 }
 PYTHONIC_NS_END

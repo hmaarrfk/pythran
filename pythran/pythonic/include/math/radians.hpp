@@ -10,7 +10,7 @@ namespace math
 {
   template <class T>
   double radians(T x);
-  DECLARE_FUNCTOR(pythonic::math, radians);
+  DEFDECLARE_FUNCTOR(pythonic::math, radians);
 }
 PYTHONIC_NS_END
 

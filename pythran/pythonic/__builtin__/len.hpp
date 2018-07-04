@@ -41,7 +41,6 @@ namespace __builtin__
     return std::distance(std::begin(t), std::end(t));
   }
 
-  DEFINE_FUNCTOR(pythonic::__builtin__, len);
 }
 PYTHONIC_NS_END
 #endif

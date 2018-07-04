@@ -22,7 +22,6 @@ namespace __builtin__
                                                                s.end()).size();
     }
 
-    DEFINE_FUNCTOR(pythonic::__builtin__::pythran, len_set);
   }
 }
 PYTHONIC_NS_END

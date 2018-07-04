@@ -27,7 +27,6 @@ namespace random
     return start + step * long((random() * (stop - start)) / std::abs(step));
   }
 
-  DEFINE_FUNCTOR(pythonic::random, randrange)
 }
 PYTHONIC_NS_END
 

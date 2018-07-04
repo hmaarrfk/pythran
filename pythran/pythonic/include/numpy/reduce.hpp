@@ -36,17 +36,30 @@ namespace numpy
   auto reduce(E const &array, long axis) ->
       typename std::enable_if<std::is_scalar<E>::value ||
                                   types::is_complex<E>::value,
-                              decltype(reduce<Op>(array))>::type;
+                              decltype(reduce<Op>(array))>::type
+  {
+    if (axis != 0)
+      throw types::ValueError("axis out of bounds");
+    return reduce<Op>(array);
+  }
 
   template <class Op, class E>
-  auto reduce(E const &array, long axis,
-              types::none_type dtype = types::none_type(),
-              types::none_type out = types::none_type()) ->
-      typename std::enable_if<E::value == 1, decltype(reduce<Op>(array))>::type;
+  auto reduce(E const &array, long axis, types::none_type, types::none_type) ->
+      typename std::enable_if<E::value == 1, decltype(reduce<Op>(array))>::type
+  {
+    if (axis != 0)
+      throw types::ValueError("axis out of bounds");
+    return reduce<Op>(array);
+  }
 
   template <class Op, class E, class Out>
-  auto reduce(E const &array, long axis, types::none_type dtype, Out &&out) ->
-      typename std::enable_if<E::value == 1, decltype(reduce<Op>(array))>::type;
+  auto reduce(E const &array, long axis, types::none_type, Out &&out) ->
+      typename std::enable_if<E::value == 1, decltype(reduce<Op>(array))>::type
+  {
+    if (axis != 0)
+      throw types::ValueError("axis out of bounds");
+    return std::forward<Out>(out) = reduce<Op>(array);
+  }
 
   namespace
   {

@@ -44,7 +44,6 @@ namespace numpy
                                                  max - 1}(details::generator);
     }
 
-    DEFINE_FUNCTOR(pythonic::numpy::random, randint);
   }
 }
 PYTHONIC_NS_END
