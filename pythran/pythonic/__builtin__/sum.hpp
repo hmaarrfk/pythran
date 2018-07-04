@@ -57,7 +57,6 @@ namespace __builtin__
     return details::tuple_sum<std::tuple<Types...>, sizeof...(Types)-1>()(t);
   }
 
-  DEFINE_FUNCTOR(pythonic::__builtin__, sum);
 }
 PYTHONIC_NS_END
 

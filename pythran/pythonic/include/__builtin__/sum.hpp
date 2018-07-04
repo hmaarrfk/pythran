@@ -40,7 +40,7 @@ namespace __builtin__
   auto sum(std::tuple<Types...> const &t) -> decltype(
       details::tuple_sum<std::tuple<Types...>, sizeof...(Types)-1>()(t));
 
-  DECLARE_FUNCTOR(pythonic::__builtin__, sum);
+  DEFDECLARE_FUNCTOR(pythonic::__builtin__, sum);
 }
 PYTHONIC_NS_END
 

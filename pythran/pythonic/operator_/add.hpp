@@ -18,7 +18,6 @@ namespace operator_
 
   DEFINE_ALL_OPERATOR_OVERLOADS_IMPL(add, +)
 
-  DEFINE_FUNCTOR(pythonic::operator_, add);
 }
 PYTHONIC_NS_END
 

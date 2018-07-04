@@ -38,7 +38,11 @@ namespace functools
       template <std::size_t... S, typename... Types>
       auto call(utils::index_sequence<S...>, Types &&... types) const
           -> decltype(std::get<0>(closure)(std::get<S + 1>(closure)...,
-                                           std::forward<Types>(types)...));
+                                           std::forward<Types>(types)...))
+    {
+      return std::get<0>(closure)(std::get<S + 1>(closure)...,
+                                  std::forward<Types>(types)...);
+    }
 
       template <typename... Types>
       auto operator()(Types &&... types) const -> decltype(

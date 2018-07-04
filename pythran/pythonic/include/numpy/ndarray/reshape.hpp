@@ -26,7 +26,7 @@ namespace numpy
 
     NUMPY_EXPR_TO_NDARRAY0_DECL(reshape);
 
-    DECLARE_FUNCTOR(pythonic::numpy::ndarray, reshape);
+    DEFDECLARE_FUNCTOR(pythonic::numpy::ndarray, reshape);
   }
 }
 PYTHONIC_NS_END
