@@ -177,15 +177,6 @@ namespace types
     return std::move(a)[s0](s...);
   }
 
-  template <class T, class pS, long N, class... S>
-  auto extended_slice<0>::operator()(ndarray<T, pS> &&a,
-                                     std::integral_constant<long, N> s0,
-                                     S const &... s)
-      -> decltype(std::declval<numpy_iexpr<ndarray<T, pS>>>()(s...))
-  {
-    return std::move(a)[N](s...);
-  }
-
   template <class T, class pS, class... S>
   auto extended_slice<0>::operator()(ndarray<T, pS> const &a, long s0,
                                      S const &... s) -> decltype(a[s0](s...))
@@ -193,27 +184,19 @@ namespace types
     return a[s0](s...);
   }
 
-  template <class T, class pS, long N, class... S>
-  auto extended_slice<0>::operator()(ndarray<T, pS> const &a,
-                                     std::integral_constant<long, N> s0,
-                                     S const &... s) -> decltype(a[N](s...))
-  {
-    return a[N](s...);
-  }
-
   template <class T, class pS, class... S, size_t... Is>
-  numpy_gexpr<ndarray<T, pS>, normalize_t<S>...> extended_slice<0>::
-  operator()(ndarray<T, pS> &&a, std::tuple<S...> const &s,
-             utils::index_sequence<Is...>)
+  numpy_gexpr<ndarray<T, pS>, normalize_t<S>...>
+  extended_slice<0>::fwd(ndarray<T, pS> &&a, std::tuple<S...> const &s,
+                         utils::index_sequence<Is...>)
   {
     return {std::move(a),
             std::get<Is>(s).normalize(std::get<Is>(a.shape()))...};
   }
 
   template <class T, class pS, class... S, size_t... Is>
-  numpy_gexpr<ndarray<T, pS>, normalize_t<S>...> extended_slice<0>::
-  operator()(ndarray<T, pS> const &a, std::tuple<S...> const &s,
-             utils::index_sequence<Is...>)
+  numpy_gexpr<ndarray<T, pS>, normalize_t<S>...>
+  extended_slice<0>::fwd(ndarray<T, pS> const &a, std::tuple<S...> const &s,
+                         utils::index_sequence<Is...>)
   {
     return {a, std::get<Is>(s).normalize(std::get<Is>(a.shape()))...};
   }
@@ -223,8 +206,8 @@ namespace types
       extended_slice<0>::operator()(ndarray<T, pS> &&a, slice const &s0,
                                     S const &... s)
   {
-    return operator()(std::move(a), std::make_tuple(s0, s...),
-                      utils::make_index_sequence<sizeof...(S) + 1>());
+    return fwd(std::move(a), std::make_tuple(s0, s...),
+               utils::make_index_sequence<sizeof...(S) + 1>());
   }
 
   template <class T, class pS, class... S>
@@ -232,8 +215,8 @@ namespace types
       extended_slice<0>::operator()(ndarray<T, pS> const &a, slice const &s0,
                                     S const &... s)
   {
-    return operator()(a, std::make_tuple(s0, s...),
-                      utils::make_index_sequence<sizeof...(S) + 1>());
+    return fwd(a, std::make_tuple(s0, s...),
+               utils::make_index_sequence<sizeof...(S) + 1>());
   }
 
   template <class T, class pS, class... S>

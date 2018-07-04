@@ -85,28 +85,19 @@ namespace types
     auto operator()(ndarray<T, pS> &&a, long s0, S const &... s)
         -> decltype(std::declval<numpy_iexpr<ndarray<T, pS>>>()(s...));
 
-    template <class T, class pS, long N, class... S>
-    auto operator()(ndarray<T, pS> &&a, std::integral_constant<long, N> s0,
-                    S const &... s)
-        -> decltype(std::declval<numpy_iexpr<ndarray<T, pS>>>()(s...));
-
     template <class T, class pS, class... S>
     auto operator()(ndarray<T, pS> const &a, long s0, S const &... s)
         -> decltype(a[s0](s...));
 
-    template <class T, class pS, long N, class... S>
-    auto operator()(ndarray<T, pS> const &a, std::integral_constant<long, N> s0,
-                    S const &... s) -> decltype(a[N](s...));
+    template <class T, class pS, class... S, size_t... Is>
+    numpy_gexpr<ndarray<T, pS>, normalize_t<S>...>
+    fwd(ndarray<T, pS> &&a, std::tuple<S...> const &s,
+        utils::index_sequence<Is...>);
 
     template <class T, class pS, class... S, size_t... Is>
     numpy_gexpr<ndarray<T, pS>, normalize_t<S>...>
-    operator()(ndarray<T, pS> &&a, std::tuple<S...> const &s,
-               utils::index_sequence<Is...>);
-
-    template <class T, class pS, class... S, size_t... Is>
-    numpy_gexpr<ndarray<T, pS>, normalize_t<S>...>
-    operator()(ndarray<T, pS> const &a, std::tuple<S...> const &s,
-               utils::index_sequence<Is...>);
+    fwd(ndarray<T, pS> const &a, std::tuple<S...> const &s,
+        utils::index_sequence<Is...>);
 
     template <class T, class pS, class... S>
     numpy_gexpr<ndarray<T, pS>, normalized_slice, normalize_t<S>...>
@@ -489,11 +480,11 @@ namespace types
                                   const_nditerator<numpy_gexpr>,
                                   dtype const *>::type;
 
-//#ifdef CYTHON_ABI
+    //#ifdef CYTHON_ABI
     typename std::remove_reference<Arg>::type arg;
-//#else
-//    Arg arg;
-//#endif
+    //#else
+    //    Arg arg;
+    //#endif
     std::tuple<S...> slices;
     dtype *buffer;
 
