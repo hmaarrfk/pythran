@@ -34,11 +34,16 @@ namespace __builtin__
           start)));
 
   template <class Iterable>
-  auto sum(Iterable s) -> decltype(sum(s, 0L));
+  auto sum(Iterable s) -> decltype(sum(s, 0L))
+  {
+    return sum(s, 0L);
+  }
 
   template <class... Types>
   auto sum(std::tuple<Types...> const &t) -> decltype(
-      details::tuple_sum<std::tuple<Types...>, sizeof...(Types)-1>()(t));
+      details::tuple_sum<std::tuple<Types...>, sizeof...(Types)-1>()(t)) {
+    return details::tuple_sum<std::tuple<Types...>, sizeof...(Types)-1>()(t);
+  }
 
   DEFDECLARE_FUNCTOR(pythonic::__builtin__, sum);
 }

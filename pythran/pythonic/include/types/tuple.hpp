@@ -79,7 +79,9 @@ namespace types
   /* helper to extract the tail of a tuple, && pop the head */
   template <int Offset, class T, size_t... N>
   auto make_tuple_tail(T const &t, utils::index_sequence<N...>)
-      -> decltype(std::make_tuple(std::get<Offset + 1 + N>(t)...));
+      -> decltype(std::make_tuple(std::get<Offset + 1 + N>(t)...)) {
+    return std::make_tuple(std::get<Offset + 1 + N>(t)...);
+      }
 
   template <class S, class... Stail>
   std::tuple<Stail...> tuple_tail(std::tuple<S, Stail...> const &t);
@@ -119,24 +121,25 @@ namespace types
     using type = array<long, sizeof...(Tys)>;
   };
 
-  template <class S>
-  S check_type(long value, S)
+  template <long N>
+  std::integral_constant<long, N> check_type(long value, std::integral_constant<long, N>)
   {
+	  assert(N == value && "consistent init");
     return {};
   }
   long check_type(long value, long)
   {
     return value;
   }
-  template <class S>
-  S check_type(S, S)
+  template <long N>
+  std::integral_constant<long, N> check_type(std::integral_constant<long, N>, std::integral_constant<long, N>)
   {
     return {};
   }
-  template <class S>
-  S check_type(S s, long v)
+  template <long N>
+  std::integral_constant<long, N> check_type(std::integral_constant<long, N>, long v)
   {
-    assert((long)s == v && "consistent init");
+    assert(N== v && "consistent init");
     return {};
   }
 
@@ -170,6 +173,12 @@ namespace types
     pshape(S const *buffer, utils::index_sequence<Is...>)
         : values{check_type(buffer[Is], std::get<Is>(values))...}
     {
+	    std::cout << values << std::endl;
+    }
+    template <class S>
+    pshape(S const *buffer)
+        : pshape(buffer, utils::make_index_sequence<sizeof...(Tys)>())
+    {
     }
     template <class... TyOs>
     pshape(pshape<TyOs...> other)
@@ -178,22 +187,17 @@ namespace types
       static_assert(sizeof...(TyOs) == sizeof...(Tys), "compatible sizes");
     }
 
-    pshape() = default;
-    pshape(pshape const &) = default;
-    pshape(pshape &&) = default;
-    pshape &operator=(pshape const &) = default;
-    pshape &operator=(pshape &&) = default;
-
-    template <class S>
-    pshape(S const *buffer)
-        : pshape(buffer, utils::make_index_sequence<sizeof...(Tys)>())
-    {
-    }
     template <class S>
     pshape(array<S, sizeof...(Tys)> data)
         : pshape(data.data())
     {
     }
+
+    pshape() = default;
+    pshape(pshape const &) = default;
+    pshape(pshape &&) = default;
+    pshape &operator=(pshape const &) = default;
+    pshape &operator=(pshape &&) = default;
 
     template <size_t... Is>
     types::array<long, sizeof...(Tys)> array(utils::index_sequence<Is...>) const
@@ -446,19 +450,31 @@ namespace types
   template <bool Same, class... Types>
   struct _make_tuple {
     auto operator()(Types &&... types)
-        -> decltype(std::make_tuple(std::forward<Types>(types)...));
+        -> decltype(std::make_tuple(std::forward<Types>(types)...)) {
+		return std::make_tuple(std::forward<Types>(types)...);
+	}
   };
 
   template <class... Types>
   struct _make_tuple<true, Types...> {
     types::array<typename alike<Types...>::type, sizeof...(Types)>
-    operator()(Types &&... types);
+    operator()(Types &&... types)
+  {
+    return {{std::forward<Types>(types)...}};
+  }
   };
+
 
   template <class... Types>
   auto make_tuple(Types &&... types)
+#ifndef _MSC_VER
       -> decltype(_make_tuple<alike<Types...>::value, Types...>()(
-          std::forward<Types>(types)...));
+          std::forward<Types>(types)...))
+#endif
+  {
+    return _make_tuple<alike<Types...>::value, Types...>()(
+        std::forward<Types>(types)...);
+  }
 
   template <class T, class Tuple, size_t... S>
   types::array<T, sizeof...(S)> _to_array(Tuple const &t,

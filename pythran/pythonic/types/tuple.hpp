@@ -63,12 +63,6 @@ namespace types
 
   /* helper to extract the tail of a tuple, && pop the head
    */
-  template <int Offset, class T, size_t... N>
-  auto make_tuple_tail(T const &t, utils::index_sequence<N...>)
-      -> decltype(std::make_tuple(std::get<Offset + 1 + N>(t)...))
-  {
-    return std::make_tuple(std::get<Offset + 1 + N>(t)...);
-  }
 
   template <class S, class... Stail>
   std::tuple<Stail...> tuple_tail(std::tuple<S, Stail...> const &t)
@@ -364,28 +358,6 @@ namespace types
     return os << ')';
   }
 
-  template <bool Same, class... Types>
-  auto _make_tuple<Same, Types...>::operator()(Types &&... types)
-      -> decltype(std::make_tuple(std::forward<Types>(types)...))
-  {
-    return std::make_tuple(std::forward<Types>(types)...);
-  }
-
-  template <class... Types>
-  types::array<typename alike<Types...>::type, sizeof...(Types)>
-      _make_tuple<true, Types...>::operator()(Types &&... types)
-  {
-    return {{std::forward<Types>(types)...}};
-  }
-
-  template <class... Types>
-  auto make_tuple(Types &&... types)
-      -> decltype(_make_tuple<alike<Types...>::value, Types...>()(
-          std::forward<Types>(types)...))
-  {
-    return _make_tuple<alike<Types...>::value, Types...>()(
-        std::forward<Types>(types)...);
-  }
 
   template <class T, size_t N, class... Types>
   auto operator+(std::tuple<Types...> const &t, types::array<T, N> const &lt)
